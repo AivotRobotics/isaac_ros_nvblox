@@ -62,6 +62,7 @@ private:
   bool convert_to_binary_costmap_ = false;
   float max_obstacle_distance_ = 1.0f;
   float inflation_distance_ = 0.5f;
+  double transform_tolerance_ = 0.4;
   // This should not include any "special" values like 255.
   uint8_t max_cost_value_ = 252;
 

@@ -54,6 +54,8 @@ void NvbloxCostmapLayer::onInitialize()
     node->declare_parameter<float>(getFullName("inflation_distance"), inflation_distance_);
   max_cost_value_ =
     node->declare_parameter<uint8_t>(getFullName("max_cost_value"), max_cost_value_);
+  transform_tolerance_ =
+      node->declare_parameter<double>(getFullName("transform_tolerance_"), transform_tolerance_);
 
   RCLCPP_INFO_STREAM(
     node->get_logger(),
@@ -247,7 +249,7 @@ void NvbloxCostmapLayer::sliceCallback(
     // Get the transform from tf.
     try {
       T_G_S_msg =
-        tf_buffer_->lookupTransform(nav2_costmap_global_frame_, slice_frame, timestamp).transform;
+        tf_buffer_->lookupTransform(nav2_costmap_global_frame_, slice_frame, timestamp,  tf2::durationFromSec(transform_tolerance_)).transform;
     } catch (tf2::TransformException & e) {
       RCLCPP_WARN_STREAM_THROTTLE(
         node->get_logger(), clk, kWarnMessagePeriodMs,
