@@ -55,7 +55,7 @@ void NvbloxCostmapLayer::onInitialize()
   max_cost_value_ =
     node->declare_parameter<uint8_t>(getFullName("max_cost_value"), max_cost_value_);
   transform_tolerance_ =
-      node->declare_parameter<double>(getFullName("transform_tolerance_"), transform_tolerance_);
+      node->declare_parameter<double>(getFullName("transform_tolerance"), transform_tolerance_);
 
   RCLCPP_INFO_STREAM(
     node->get_logger(),
