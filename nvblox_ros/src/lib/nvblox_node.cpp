@@ -1667,6 +1667,7 @@ void NvbloxNode::getEsdfAndGradientService(
 {
   timing::Timer esdf_service_timer("ros/esdf_service");
   timing::Rates::tick("ros/esdf_service");
+  /*
   RCLCPP_INFO(
     get_logger(),
     "\nReceived request for ESDF with:\nupdate_esdf: %d\nuse_aabb: "
@@ -1676,6 +1677,7 @@ void NvbloxNode::getEsdfAndGradientService(
     request->aabb_min_m.y, request->aabb_min_m.z,
     request->aabb_size_m.x, request->aabb_size_m.y,
     request->aabb_size_m.z);
+  */
   if (params_.esdf_mode != EsdfMode::k3D) {
     RCLCPP_FATAL_STREAM(
       get_logger(),
@@ -1739,9 +1741,9 @@ void NvbloxNode::getEsdfAndGradientService(
         node->params_.esdf_and_gradients_unobserved_value,
         service_request, service_response, *node->cuda_stream_);
       if (service_response->success) {
-        RCLCPP_INFO_STREAM(
-          node->get_logger(),
-          "Successfully wrote requested ESDF to MultiArrayMsg.");
+        // RCLCPP_INFO_STREAM(
+        //   node->get_logger(),
+        //   "Successfully wrote requested ESDF to MultiArrayMsg.");
       } else {
         RCLCPP_WARN_STREAM(
           node->get_logger(),
